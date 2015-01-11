@@ -16,11 +16,8 @@ public class Main extends Application {
 		try {
 			root = FXMLLoader.load(getClass().getResource("gui.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-			
-			
-			primaryStage.setTitle("HTML Parser v0.2");
+			primaryStage.setTitle("HTML Parser");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.setResizable(false);

@@ -5,11 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-
-
-import java.util.TreeMap;
-
-import model.Table;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Table;
 
 public class MyController implements Initializable {
 
@@ -64,11 +60,6 @@ public class MyController implements Initializable {
 		tableID.setItems(data);
 	}
 	
-	public void comboBoxAction(ActionEvent event) {
-		
-	}
-	
-	
 	public void generateResults(ActionEvent event) {
 		// valid input
 		if (urlTextField.getText().trim() != null
@@ -84,12 +75,8 @@ public class MyController implements Initializable {
 				if (++counter >= wordsComboBox.getValue())
 					break;
 			}
-			
-			
-			
-//			Table entry = new Table(iNumber++, urlTextField.getText().trim(), wordsComboBox.getValue());
-//			data.add(entry); // add data to table
 		}
+		
 		// invalid input, display error message
 		else {
 			errorMessage.setVisible(true);
