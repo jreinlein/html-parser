@@ -1,9 +1,13 @@
 package application;
 
 import java.net.URL;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 
+
+import java.util.TreeMap;
 
 import model.Table;
 import javafx.collections.FXCollections;
@@ -26,7 +30,7 @@ public class MyController implements Initializable {
 	@FXML
 	private ComboBox<Integer> wordsComboBox;
 	ObservableList<Integer> wordChoices = FXCollections.observableArrayList(
-			5, 10, 15, 20, 50);
+			5, 10, 15, 20, 50, 100);
 	@FXML
 	private TextField urlTextField;
 	@FXML
@@ -58,7 +62,6 @@ public class MyController implements Initializable {
 		tCount.setCellValueFactory(new PropertyValueFactory<Table, Integer>("rCount"));
 
 		tableID.setItems(data);
-		
 	}
 	
 	public void comboBoxAction(ActionEvent event) {
@@ -71,8 +74,21 @@ public class MyController implements Initializable {
 		if (urlTextField.getText().trim() != null
 				&& !urlTextField.getText().trim().isEmpty()) {
 			errorMessage.setVisible(false);
-			Table entry = new Table(iNumber++, urlTextField.getText().trim(), wordsComboBox.getValue());
-			data.add(entry); // add data to table
+			
+			LinkedHashMap<String, Integer> results = HtmlParser.callThis(urlTextField.getText().trim());
+			
+			int counter = 0;
+			for (Map.Entry<String, Integer> entry : results.entrySet()) {
+				Table tmp = new Table(iNumber++, entry.getKey(), entry.getValue());
+				data.add(tmp);
+				if (++counter >= wordsComboBox.getValue())
+					break;
+			}
+			
+			
+			
+//			Table entry = new Table(iNumber++, urlTextField.getText().trim(), wordsComboBox.getValue());
+//			data.add(entry); // add data to table
 		}
 		// invalid input, display error message
 		else {

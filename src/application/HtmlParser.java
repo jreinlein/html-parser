@@ -1,4 +1,5 @@
 package application;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,27 +21,24 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Whitelist;
 
-
 // Inspired by: http://www.reddit.com/r/dailyprogrammer/comments/2nynip/2014121_challenge_191_easy_word_counting/
 
 public class HtmlParser {
-	// HTML URL in which to parse text from
-	private static final String URL = "http://en.wikipedia.org/wiki/South_African_labour_law";
 	// Used in detection of words and counting
 	private static final Pattern WORD_PATTERN = Pattern.compile("[a-zA-Z]+");
-	// Tree Map used to count words
-	private static TreeMap<String, Integer> wordMap = new TreeMap<String, Integer>();
 	// Allows or omits propositions/determiners (the, or, in, by, as, of, and,
 	// etc.)
 	private static final boolean ALL_WORDS = true;
 	// Determines how many of the most common words to print out
-	private static final int NUM_WORDS_DISPLAYED = 200;
+	private static int MAX_WORDS_TO_OUTPUT = 100;
 
 	/**
-	 * Counts the number of times words occur in a given string. Depends on
-	 * WORD_PATTERN
+	 * Takes a string, counts the number of times words occur in the string and
+	 * then returns that information in the form of a LinkedHashMap. Dependent
+	 * on WORD_PATTERN
 	 */
-	public static void countWords(String str) {
+	public static LinkedHashMap<String, Integer> textToCountedMap(String str) {
+		TreeMap<String, Integer> wordMap = new TreeMap<String, Integer>();
 		Matcher m = WORD_PATTERN.matcher(str);
 		while (m.find()) {
 			String word = m.group().toLowerCase(); // ignore case!
@@ -53,36 +51,19 @@ public class HtmlParser {
 				wordMap.put(word, wordMap.get(word) + 1);
 			}
 		}
+		return descOrder(wordMap);
 	}
 
 	/**
-	 * Calls helper method which sorts, then prints all key-value pairs in map.
-	 */
-	public static void printDescOrder() {
-		// sort
-		Map<String, Integer> sorted = sortByValue(wordMap);
-		// print
-		StringBuilder result = new StringBuilder();
-
-		int counter = 0;
-		for (Map.Entry<String, Integer> entry : sorted.entrySet()) {
-			result.append(entry.getKey() + ": " + entry.getValue() + "\n");
-			if (++counter >= NUM_WORDS_DISPLAYED)
-				break;
-		}
-
-		System.out.println(result.toString());
-	}
-
-	/**
-	 * Sorts the given Map<String, Integer> in descending order based on values.
-	 * Returns a sorted map. Credit to
+	 * Helper method. Sorts the given TreeMap<String, Integer> in descending
+	 * order based on values. Returns a sorted LinkedHashMap. Credit to
 	 * http://stackoverflow.com/a/13913206/3901262
 	 */
-	private static Map<String, Integer> sortByValue(
-			Map<String, Integer> unsorted) {
+	private static LinkedHashMap<String, Integer> descOrder(
+			TreeMap<String, Integer> mapToOrder) {
+
 		List<Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(
-				unsorted.entrySet());
+				mapToOrder.entrySet());
 
 		// sort the list based on VALUES
 		Collections.sort(list, new Comparator<Entry<String, Integer>>() {
@@ -94,7 +75,7 @@ public class HtmlParser {
 		});
 
 		// maintain insertion order with help of LinkedList
-		Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
+		LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
 		for (Entry<String, Integer> entry : list) {
 			sortedMap.put(entry.getKey(), entry.getValue());
 		}
@@ -219,122 +200,17 @@ public class HtmlParser {
 		return result;
 	}
 
-	/**
-	 * Calls every helper method on the given string, resulting in a string
-	 * without any unwanted characters.
-	 */
-	public static String HtmlToPlainText(String htmlToParse) {
-		String result = "";
+	public static LinkedHashMap<String, Integer> countedWordResults(String url) {
+		String text = "";
 
-		result = getTextFromHtml(htmlToParse).toLowerCase(); // 800ms
-		result = removeHtmlTags(result); // 500ms
-		result = removeUrl(result);
-		result = removeNonLetters(result);
-		result = removeUnwantedWords(result); // 950ms
+		text = getTextFromHtml(url);
+		text = removeHtmlTags(text);
+		text = removeUrl(text);
+		text = removeNonLetters(text);
+		text = removeUnwantedWords(text);
 
-		return result;
+		LinkedHashMap<String, Integer> wordMap = textToCountedMap(text);
+
+		return wordMap;
 	}
-
-	// public static void main(String[] args) {
-	// String text = HtmlToPlainText(URL);
-	// countWords(text);
-	// printDescOrder();
-	//
-	// }
-
-	// ABOVE is main for program to run to console, below is code to make pretty
-	// :)
-	// TODO Consider splitting this stuff up...
-
-//	public HtmlParser() {
-//		initializeUI();
-//	}
-//
-//	private void initializeUI() {
-//		JPanel pane = (JPanel) getContentPane();
-//		GroupLayout gl = new GroupLayout(pane); // Never use GroupLayout manually again....
-//		pane.setLayout(gl);
-//
-//		// =========== MODULES =========== 
-//		
-//		JButton aboutBtn = new JButton("About");
-//		aboutBtn.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				AboutDialog ad = new AboutDialog();
-//				ad.setVisible(true);
-//			}
-//		});
-//		
-//		JButton calcBtn = new JButton("Calculate");
-//		calcBtn.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				System.out.println("butts");
-//			}
-//		});
-//
-//		
-//		JLabel wikiText = new JLabel("Link to Wikipedia Article");
-//		JLabel wordText = new JLabel("Number of Words");
-//		
-//		JTextField url = new JTextField(30);
-//		
-//		// =========== HORIZONTAL =========== 
-//		
-//		GroupLayout.SequentialGroup hGroup = gl.createSequentialGroup();
-//		
-//		hGroup.addGroup(gl.createParallelGroup().
-//				addComponent(wikiText).
-//				addComponent(url).
-//				addComponent(wordText).
-//				addComponent(aboutBtn));
-//		
-//		hGroup.addGroup(gl.createParallelGroup().
-//				addComponent(calcBtn));
-//
-//		hGroup.addGroup(gl.createParallelGroup());
-//		
-//		gl.setHorizontalGroup(hGroup);
-//
-//		// =========== VERTICAL =========== 
-//		
-//		GroupLayout.SequentialGroup vGroup = gl.createSequentialGroup();
-//		
-//		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE). // text label (wikipedia)
-//				addComponent(wikiText));
-//		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE). // text field for URL
-//				addComponent(url));
-//		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE). // text label (num words)
-//				addComponent(wordText));
-//		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE). // about button
-//				addComponent(aboutBtn).
-//				addComponent(calcBtn));
-//		
-//		gl.setVerticalGroup(vGroup);
-//
-//		// =========== SETTINGS =========== 
-//		
-//		gl.setAutoCreateContainerGaps(true);
-//		gl.setAutoCreateGaps(true);
-//		
-//		pack();
-//
-//		setTitle("HTML Parser v0.1");
-//		setLocationRelativeTo(null); // centers window to screen
-//		setResizable(false);
-//		setDefaultCloseOperation(EXIT_ON_CLOSE); // allows X to close window
-//	}
-
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				HtmlParser window = new HtmlParser();
-//				window.setVisible(true);
-//			}
-//		});
-//	}
-
 }
-// http://zetcode.com/tutorials/javaswingtutorial/firstprograms/
