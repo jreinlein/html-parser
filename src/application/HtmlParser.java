@@ -106,7 +106,7 @@ public class HtmlParser {
 		// of junk)
 		result = StringUtils.substringBefore(result, "References[edit]");
 
-		return result;
+		return result.toLowerCase();
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class HtmlParser {
 
 		String[] singles = { "b", "c", "d", "e", "f", "g", "h", "j", "k", "l",
 				"m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
-				"y", "z", "th", "edit" };
+				"y", "z"};
 		String[] prepositionsDeterminersConjunctions = { "abord", "about",
 				"above", "across", "after", "against", "along", "amid",
 				"among", "around", "as", "at", "before", "behind", "below",
@@ -184,6 +184,7 @@ public class HtmlParser {
 
 		unwanted.add("th"); // ie 4th --> th
 		unwanted.add("edit"); // from [edit] all over Wikipedia article
+		unwanted.add("pp"); // from pp. 34
 		unwanted.add("et");
 		unwanted.add("al"); // ie Johnson et al
 
