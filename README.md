@@ -12,6 +12,7 @@ Output: Most common words used in that article, descending order.
 5. Optimize run speed (primarily of removal of unwanted words)
 6. Allow exportation of results into .csv or .xls file
 
-## Required Libraries
-- JSOUP (parses HTML)
+## Libraries
+- JSoup (parses HTML)
 - Apache Commons Lang (3.x)
+- JavaFX 2
