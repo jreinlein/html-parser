@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -29,8 +28,6 @@ public class HtmlParser {
 	// Allows or omits propositions/determiners (the, or, in, by, as, of, and,
 	// etc.)
 	private static final boolean ALL_WORDS = true;
-	// Determines how many of the most common words to print out
-	private static int MAX_WORDS_TO_OUTPUT = 100;
 
 	/**
 	 * Takes a string, counts the number of times words occur in the string and

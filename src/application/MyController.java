@@ -75,7 +75,7 @@ public class MyController implements Initializable {
 				&& !urlTextField.getText().trim().isEmpty()) {
 			errorMessage.setVisible(false);
 			
-			LinkedHashMap<String, Integer> results = HtmlParser.callThis(urlTextField.getText().trim());
+			LinkedHashMap<String, Integer> results = HtmlParser.countedWordResults(urlTextField.getText().trim());
 			
 			int counter = 0;
 			for (Map.Entry<String, Integer> entry : results.entrySet()) {
