@@ -76,6 +76,7 @@ public class MyController implements Initializable {
 				if (++counter >= wordsComboBox.getValue())
 					break;
 			}
+			tableID.scrollTo(0);
 		}
 		
 		// invalid input, display error message
