@@ -187,6 +187,7 @@ public class HtmlParser {
 		unwanted.add("pp"); // from pp. 34
 		unwanted.add("et");
 		unwanted.add("al"); // ie Johnson et al
+		unwanted.add("wikipedia");
 
 		if (ALL_WORDS) {
 			for (String word : prepositionsDeterminersConjunctions)

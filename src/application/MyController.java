@@ -26,7 +26,7 @@ public class MyController implements Initializable {
 	@FXML
 	private ComboBox<Integer> wordsComboBox;
 	ObservableList<Integer> wordChoices = FXCollections.observableArrayList(
-			5, 10, 15, 20, 50, 100);
+			5, 10, 20, 50, 100, 200, 500, 1000);
 	@FXML
 	private TextField urlTextField;
 	@FXML
@@ -50,7 +50,7 @@ public class MyController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// load # of word choices into combo box
 		wordsComboBox.setItems(wordChoices);
-		wordsComboBox.getSelectionModel().selectFirst();
+		wordsComboBox.getSelectionModel().select(4);
 		// set error message to be invisible by default
 		errorMessage.setVisible(false);
 		
@@ -65,6 +65,7 @@ public class MyController implements Initializable {
 		if (urlTextField.getText().trim() != null
 				&& !urlTextField.getText().trim().isEmpty()) {
 			errorMessage.setVisible(false);
+			data.clear(); // remove old results
 			
 			LinkedHashMap<String, Integer> results = HtmlParser.countedWordResults(urlTextField.getText().trim());
 			

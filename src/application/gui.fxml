@@ -22,8 +22,8 @@
       <TextField fx:id="urlTextField" layoutX="21.0" layoutY="57.0" prefHeight="25.0" prefWidth="307.0" promptText="Enter URL here" />
       <TableView fx:id="tableID" layoutX="343.0" layoutY="15.0" prefHeight="569.0" prefWidth="243.0">
         <columns>
-          <TableColumn fx:id="tWord" prefWidth="180.0" resizable="false" sortable="false" text="Word" />
-          <TableColumn fx:id="tCount" prefWidth="62.0" resizable="false" sortType="DESCENDING" sortable="false" text="Count" />
+          <TableColumn fx:id="tWord" prefWidth="176.0" resizable="false" sortable="false" text="Word" />
+          <TableColumn fx:id="tCount" prefWidth="65.0" resizable="false" sortType="DESCENDING" sortable="false" text="Count" />
         </columns>
       </TableView>
       <Label fx:id="errorMessage" layoutX="91.0" layoutY="222.0" text="Invalid input! Try again." textAlignment="CENTER" textFill="RED">
