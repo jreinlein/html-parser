@@ -22,11 +22,17 @@ import org.jsoup.safety.Whitelist;
 
 // Inspired by: http://www.reddit.com/r/dailyprogrammer/comments/2nynip/2014121_challenge_191_easy_word_counting/
 
+/**
+ * Java code which does all the calculations. Takes an URL as a string and
+ * outputs a Map of the most common words.
+ * 
+ * @author James Reinlein
+ */
 public class HtmlParser {
 	// Used in detection of words and counting
 	private static final Pattern WORD_PATTERN = Pattern.compile("[a-zA-Z]+");
 	// Allows or omits propositions/determiners (the, or, in, by, as, of, and,
-	// etc.)
+	// etc.) --> Can be used for added features in future
 	private static final boolean ALL_WORDS = true;
 
 	/**
@@ -157,7 +163,7 @@ public class HtmlParser {
 
 		String[] singles = { "b", "c", "d", "e", "f", "g", "h", "j", "k", "l",
 				"m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
-				"y", "z"};
+				"y", "z" };
 		String[] prepositionsDeterminersConjunctions = { "abord", "about",
 				"above", "across", "after", "against", "along", "amid",
 				"among", "around", "as", "at", "before", "behind", "below",
