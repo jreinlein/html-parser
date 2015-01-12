@@ -72,9 +72,14 @@ public class MyController implements Initializable {
 	 * the Java code which does the calculations and provides the output.
 	 */
 	public void generateResults(ActionEvent event) {
+		// invalid input, display error message
+		if (urlTextField.getText().trim() == null // nothing inside 
+				|| urlTextField.getText().trim().isEmpty() // only spaces
+				|| !urlTextField.getText().trim().contains("en.wikipedia.org")) // forces URL to be from English Wikipedia site
+			errorMessage.setVisible(true);
+
 		// valid input
-		if (urlTextField.getText().trim() != null
-				&& !urlTextField.getText().trim().isEmpty()) {
+		else {
 			errorMessage.setVisible(false);
 			data.clear(); // remove old results already in table
 
@@ -90,11 +95,6 @@ public class MyController implements Initializable {
 					break;
 			}
 			tableID.scrollTo(0);
-		}
-
-		// invalid input, display error message
-		else {
-			errorMessage.setVisible(true);
 		}
 
 	}
