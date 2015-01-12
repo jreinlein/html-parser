@@ -5,12 +5,10 @@ Input: URL to a Wikipedia article.
 Output: Most common words used in that article, descending order.
 
 ## Future Plans
-1. Polish and Package into an applet
-2. Accept input from user for different URLs/number of words to display
-3. See if it works with non-english articles
-4. Implement word-cloud creation functionality for most common words
-5. Optimize run speed (primarily of removal of unwanted words)
-6. Allow exportation of results into .csv or .xls file
+1. See if it works with non-english articles
+2. Implement word-cloud creation functionality for most common words
+3. Allow exportation of results into .csv or .xls file
+4. Provide support for non-Wikipedia URLs
 
 ## Libraries
 - JSoup (parses HTML)
