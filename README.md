@@ -13,7 +13,9 @@ Parses text from Wikipedia articles and provides most common words used.
 1. Provide functionality for non-English articles
 2. Implement word-cloud creation functionality for most common words
 3. Allow exportation of results into .csv or .xls file
-4. Provide support for non-Wikipedia URLs
+4. Provide support for random Wikipedia articles
+   1.  Implement quiz-type game (match word list to article name)
+5. Provide support for non-Wikipedia URLs
 
 ## Libraries
 - JSoup (parses HTML)
