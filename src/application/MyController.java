@@ -16,7 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.GaussianBlur;
 import model.Table;
 
 /**
@@ -30,6 +32,9 @@ public class MyController implements Initializable {
 	@FXML
 	private Button calcBtn;
 	@FXML
+	private ToggleButton randBtn;
+	private String lastUrl; // stores last URL entered before randomizing URL
+	@FXML
 	private ComboBox<Integer> wordsComboBox;
 	ObservableList<Integer> wordChoices = FXCollections.observableArrayList(5,
 			10, 20, 50, 100, 200, 500, 1000);
@@ -37,6 +42,7 @@ public class MyController implements Initializable {
 	private TextField urlTextField;
 	@FXML
 	private Label errorMessage;
+
 
 	// defining table
 
@@ -73,9 +79,11 @@ public class MyController implements Initializable {
 	 */
 	public void generateResults(ActionEvent event) {
 		// invalid input, display error message
-		if (urlTextField.getText().trim() == null // nothing inside 
+		if (urlTextField.getText() == null
+				|| urlTextField.getText().trim() == null // nothing inside
 				|| urlTextField.getText().trim().isEmpty() // only spaces
-				|| !urlTextField.getText().trim().contains("en.wikipedia.org")) // forces URL to be from English Wikipedia site
+				// forces URL to be from English Wikipedia site
+				|| !urlTextField.getText().trim().contains("en.wikipedia.org"))
 			errorMessage.setVisible(true);
 
 		// valid input
@@ -97,6 +105,30 @@ public class MyController implements Initializable {
 			tableID.scrollTo(0);
 		}
 
+	}
+
+	/**
+	 * Randomizes URL in the text field and disables the text field (while the
+	 * button is toggled). Releasing button returns the text field's value to
+	 * what it was prior to pressing the button.
+	 */
+	public void randomizeUrl(ActionEvent event) {
+		if (randBtn.isSelected()) {
+			lastUrl = urlTextField.getText();
+			urlTextField.setText("http://en.wikipedia.org/wiki/Special:Random");
+			urlTextField.setEditable(false);
+			urlTextField.setDisable(true);
+
+			GaussianBlur blur = new GaussianBlur(3);
+			urlTextField.setEffect(blur);
+		}
+		// on release of button
+		else {
+			urlTextField.setText(lastUrl);
+			urlTextField.setEditable(true);
+			urlTextField.setDisable(false);
+			urlTextField.setEffect(null);
+		}
 	}
 
 }
