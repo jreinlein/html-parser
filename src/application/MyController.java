@@ -43,7 +43,6 @@ public class MyController implements Initializable {
 	@FXML
 	private Label errorMessage;
 
-
 	// defining table
 
 	@FXML
@@ -107,6 +106,7 @@ public class MyController implements Initializable {
 
 	}
 
+	
 	/**
 	 * Randomizes URL in the text field and disables the text field (while the
 	 * button is toggled). Releasing button returns the text field's value to
