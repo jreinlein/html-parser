@@ -17,10 +17,11 @@
          </font>
       </Button>
       <Label layoutX="108.0" layoutY="36.0" prefHeight="17.0" prefWidth="132.0" scaleX="1.5" scaleY="1.5" text="Link to Wikipedia Article" />
+      <TextField fx:id="urlTextField" alignment="CENTER" layoutX="21.0" layoutY="57.0" prefHeight="25.0" prefWidth="307.0" promptText="Enter URL here" />
+      <ToggleButton fx:id="randBtn" layoutX="111.0" layoutY="89.0" mnemonicParsing="false" onAction="#randomizeUrl" prefHeight="25.0" prefWidth="125.0" text="Random Article" />
       <Label layoutX="126.0" layoutY="141.0" prefHeight="17.0" prefWidth="97.0" scaleX="1.5" scaleY="1.5" text="Number of Words" />
       <ComboBox fx:id="wordsComboBox" layoutX="130.0" layoutY="162.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="urlTextField" alignment="CENTER" layoutX="21.0" layoutY="57.0" prefHeight="25.0" prefWidth="307.0" promptText="Enter URL here" />
-      <TableView fx:id="tableID" layoutX="343.0" layoutY="15.0" prefHeight="569.0" prefWidth="243.0">
+      <TableView fx:id="tableID" focusTraversable="false" layoutX="343.0" layoutY="15.0" prefHeight="569.0" prefWidth="243.0">
         <columns>
           <TableColumn fx:id="tWord" prefWidth="176.0" resizable="false" sortable="false" text="Word" />
           <TableColumn fx:id="tCount" prefWidth="65.0" resizable="false" sortType="DESCENDING" sortable="false" text="Count" />
@@ -36,6 +37,5 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <ToggleButton fx:id="randBtn" layoutX="111.0" layoutY="89.0" mnemonicParsing="false" onAction="#randomizeUrl" prefHeight="25.0" prefWidth="125.0" text="Random Article" />
    </children>
 </Pane>
