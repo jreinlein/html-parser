@@ -5,9 +5,9 @@ Parses text from Wikipedia articles and provides most common words used.
 
 **Output:** Most common words used in that article, descending order.
 
-![preview](https://raw.githubusercontent.com/jreinlein/html-parser/master/preview.png)
+![preview](preview.png)
 ## Download
-[:arrow_down: Version 1.0.2](preview.png)
+[:arrow_down: Version 1.0.2](https://github.com/jreinlein/html-parser/releases/download/v1.0.2/HTML.Parser.1.0.2.jar)
 
 ## Future Plans
 1. Provide functionality for non-English articles
