@@ -7,7 +7,7 @@ Parses text from Wikipedia articles and provides most common words used.
 
 ![preview](https://raw.githubusercontent.com/jreinlein/html-parser/master/preview.png)
 ## Download
-[:arrow_down: Version 1.0.1](https://github.com/jreinlein/html-parser/releases/download/v1.0.1/HTML.Parser.1.0.1.jar)
+[:arrow_down: Version 1.0.2](preview.png)
 
 ## Future Plans
 1. Provide functionality for non-English articles
