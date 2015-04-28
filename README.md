@@ -1,4 +1,4 @@
-# html-parser
+# WikiCount
 Parses text from Wikipedia articles and provides most common words used.
 
 **Input:** URL to an English Wikipedia article.
